@@ -1,0 +1,35 @@
+package com.LoginRegister.example.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.LoginRegister.example.entity.Users;
+import com.LoginRegister.example.repository.UsersRepo;
+import com.LoginRegister.example.requests.LoginRequest;
+
+@Service
+public class UserService {
+
+	@Autowired
+	UsersRepo userRepo;
+
+	public Users addUser(Users user) {
+		return userRepo.save(user);
+	}
+
+	public Boolean loginUser(LoginRequest loginRequest) {
+		Optional<Users> user = userRepo.findById(loginRequest.getUserId());
+		if(user.isEmpty()) {
+			return false;
+		}
+
+		Users existingUser = user.get();
+		if(!existingUser.getPassword().equals(loginRequest.getPassword())) {
+			return false;
+		}
+		return true;
+
+	}
+}

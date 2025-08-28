@@ -1,0 +1,2 @@
+spring.application.name=LoginRegisterServer
+server.port = 8082

@@ -1,0 +1,18 @@
+package com.LoginRegister.example.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.LoginRegister.example.entity.Users;
+import com.LoginRegister.example.repository.UsersRepo;
+
+@Service
+public class UserService {
+
+	@Autowired
+	UsersRepo userRepo;
+	public Users addUser(Users user) {
+		return userRepo.save(user);
+	}
+	
+}
